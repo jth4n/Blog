@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PostData, GetData } from '../../infrastructure/request'
+import { CreateApi } from '../../infrastructure/request'
 import { Loader } from '../Loader';
 import { Redirect } from 'react-router';
 import { PostForm } from '../PostForm';
@@ -8,11 +8,12 @@ export const EditPost = (props) => {
     
     const [post, setPost] = useState();
     const [showLoader, setShowLoader] = useState(true);
+    const api = CreateApi('https://localhost:44369/api');
 
     useEffect(() => {
         const postId = props.match.params.id;
         console.log(postId);
-        GetData('https://localhost:44369/api/posts/' + postId)
+        api.getPost(postId)
             .then(data => setPost(data))
             .catch(reason => console.log(reason))
             .then(() => setShowLoader(false));

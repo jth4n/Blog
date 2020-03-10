@@ -6,7 +6,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 export const PostForm = (props) => {
 
     const [form, setState] = useState(props.post);
-
+    
     const handleEditorChange = (content, editor) => {
         setState({
             ...form,

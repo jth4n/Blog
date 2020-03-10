@@ -21,6 +21,8 @@ namespace Blog.Frontend.Data
                     e => e.ToString(),
                     e => (PostStatus) Enum.Parse(typeof(PostStatus), e));
 
+            
+
             //modelBuilder.Entity<Tag>(t =>
             //{
             //    t.Property(p => p.Id).ValueGeneratedNever();

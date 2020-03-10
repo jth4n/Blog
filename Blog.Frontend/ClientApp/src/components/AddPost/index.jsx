@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { PostData } from '../../infrastructure/request'
+import { CreateApi } from '../../infrastructure/request'
 import { Loader } from '../Loader';
 import { Redirect } from 'react-router';
-import {PostForm} from '../PostForm';
+import { PostForm } from '../PostForm';
 
 export const AddPost = () => {
     const [showLoader, setShowLoader] = useState(false);
     const [redirectToPostList, setRedirectToPostList] = useState(false);
 
+    const api = CreateApi('https://localhost:44369/api');
+
     const submit = (event, form) => {
         setShowLoader(true);
         event.preventDefault();
-        PostData('https://localhost:44369/api/posts', form)
+        api.createPost(form)
             .then(response => {
                 console.log(response);
             })
@@ -26,7 +28,7 @@ export const AddPost = () => {
         <>
             {redirectToPostList && <Redirect to="/posts" />}
             {showLoader && <Loader />}
-            <PostForm onSubmit={submit} post={{title: '', content: '', tags: ['Whisky', 'Scotch']}}/>
+            <PostForm onSubmit={submit} post={{ title: '', content: '', tags: ['Whisky', 'Scotch'] }} />
         </>
     );
 }

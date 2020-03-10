@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'reactstrap';
-import { GetData, DeleteData } from '../../infrastructure/request'
+import { CreateApi } from '../../infrastructure/request'
 import { IoIosAddCircleOutline, IoMdTrash, IoMdCreate } from "react-icons/io";
 import { Loader } from '../Loader';
 
@@ -8,9 +8,10 @@ export const PostsTable = () => {
 
     const [posts, setPosts] = useState([]);
     const [showLoader, setShowLoader] = useState(true);
+    const api = CreateApi('https://localhost:44369/api');
 
     useEffect(() => {
-        const posts = GetData('https://localhost:44369/api/posts')
+        const posts = api.getPosts('https://localhost:44369/api/posts')
             .then(data => setPosts(data))
             .catch(reason => console.log(reason))
             .then(() => setShowLoader(false));
@@ -18,7 +19,7 @@ export const PostsTable = () => {
 
     const deletePost = (id) => {
         setShowLoader(true);
-        DeleteData('https://localhost:44369/api/posts/' + id)
+        api.deletePost(id)
             .then((response) => console.log(response))
             .catch(error => console.log(error))
             .then(() => setShowLoader(false));
