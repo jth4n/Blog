@@ -36,6 +36,13 @@ namespace Blog.Frontend.Controllers
             return Ok(await _blogRepository.GetAllPosts());
         }
 
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetPost(Guid id)
+        {
+            return Ok(await _blogRepository.GetPost(id));
+        }
+
         [HttpDelete]
         [Route("{id:Guid}")]
         public async Task<IActionResult> DeletePost([FromRoute]DeletePostRequest request)

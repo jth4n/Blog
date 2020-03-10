@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Form, FormGroup, Label, Input, Row } from 'reactstrap';
 import { Editor } from '@tinymce/tinymce-react';
+import { Typeahead } from 'react-bootstrap-typeahead';
 
 export const PostForm = (props) => {
 
@@ -11,6 +12,19 @@ export const PostForm = (props) => {
             ...form,
             ["content"]: content
         });
+    }
+
+    const handleTagListChange = (items) => {
+        setState({
+            ...form,
+            ["tags"] : items.map(e => {
+                if(e && e.label)
+                    return e.label;
+                return e;
+            })
+        });
+        // if(item && item)
+        // console.log(item?.label);
     }
 
     const handleFormUpdates = (event) => {
@@ -43,6 +57,19 @@ export const PostForm = (props) => {
                 }}
                 onEditorChange={handleEditorChange}
             />
+            <FormGroup>
+            <Label>Tags</Label>
+                <Typeahead
+                    onChange={handleTagListChange}
+                    selected={form.tags}
+                    allowNew
+                    id="custom-selections-example"
+                    multiple
+                    newSelectionPrefix="Add a new item: "
+                    options={[]}
+                    placeholder="Type anything..."
+                />
+            </FormGroup>
 
             <Button color="primary">Submit</Button>
         </Form>

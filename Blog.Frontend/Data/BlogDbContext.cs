@@ -7,6 +7,7 @@ namespace Blog.Frontend.Data
     public class BlogDbContext : DbContext
     {
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         public BlogDbContext(
             DbContextOptions<BlogDbContext> options) : base(options)
         {
@@ -19,6 +20,13 @@ namespace Blog.Frontend.Data
                 .HasConversion(
                     e => e.ToString(),
                     e => (PostStatus) Enum.Parse(typeof(PostStatus), e));
+
+            //modelBuilder.Entity<Tag>(t =>
+            //{
+            //    t.Property(p => p.Id).ValueGeneratedNever();
+            //    t.Property(t => t.TagName);
+            //});
+            
 
             base.OnModelCreating(modelBuilder);
         }

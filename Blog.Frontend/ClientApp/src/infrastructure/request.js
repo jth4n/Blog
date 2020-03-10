@@ -35,7 +35,8 @@ import React from 'react';
         return response; // parses JSON response into native JavaScript objects
       }
 
-      export async function GetData(url = '', data = {}) {
+      export async function GetData(url) {
+          console.log(url);
         // Default options are marked with *
         const response = await fetch(url, {
           method: 'GET', // *GET, POST, PUT, DELETE, etc.

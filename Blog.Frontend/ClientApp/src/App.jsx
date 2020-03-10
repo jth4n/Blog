@@ -8,6 +8,7 @@ import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import {AddPost} from './components/AddPost'
+import {EditPost} from './components/EditPost'
 import {PostsTable} from './components/PostsTable'
 import './custom.css'
 
@@ -24,6 +25,7 @@ export default class App extends Component {
         <AuthorizeRoute path='/fetch-data' component={FetchData} />
         <Route path='/posts' component={PostsTable} />
         <Route path='/add-post' component={AddPost} />
+        <Route path='/edit-post/:id' component={EditPost} />
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
     );

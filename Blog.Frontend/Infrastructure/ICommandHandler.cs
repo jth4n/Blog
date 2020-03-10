@@ -19,7 +19,7 @@ namespace Blog.Frontend.Infrastructure
         }
         public async Task Handle(CreatePostRequest command)
         {
-            var post = Post.Create(command.Title, command.Content, "Jonathan");
+            var post = Post.Create(command.Title, command.Content, "Jonathan", command.Tags);
             await _blogRepository.Save(post);
         }
 

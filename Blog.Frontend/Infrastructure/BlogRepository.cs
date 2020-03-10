@@ -14,6 +14,7 @@ namespace Blog.Frontend.Infrastructure
         Task<Post> Load(Guid id);
         Task Delete(Guid id);
         Task<IEnumerable<Post>> GetAllPosts();
+        Task<Post> GetPost(Guid id);
     }
 
     class BlogRepository : IBlogRepository
@@ -47,6 +48,12 @@ namespace Blog.Frontend.Infrastructure
         public async Task<IEnumerable<Post>> GetAllPosts()
         {
             return await _context.Posts.ToListAsync();
+        }
+
+        public async Task<Post> GetPost(Guid id)
+        {
+            var post = await _context.Posts.Include(t => t.Tags).FirstOrDefaultAsync(p => p.Id == id);
+            return post;
         }
     }
 }

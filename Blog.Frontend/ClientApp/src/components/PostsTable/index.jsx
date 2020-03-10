@@ -45,8 +45,7 @@ export const PostsTable = () => {
                             <td>{post.author}</td>
                             <td>{post.created}</td>
                             <td>
-                                
-                                <Button color="link"><IoMdCreate /></Button>
+                                <a href={"/edit-post/" + post.id}><IoMdCreate /></a>
                                 <Button color="link" onClick={() => deletePost(post.id)}><IoMdTrash /></Button>
                             </td>
                         </tr>)}

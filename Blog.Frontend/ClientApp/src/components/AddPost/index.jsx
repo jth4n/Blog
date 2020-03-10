@@ -26,7 +26,7 @@ export const AddPost = () => {
         <>
             {redirectToPostList && <Redirect to="/posts" />}
             {showLoader && <Loader />}
-            <PostForm onSubmit={submit} post={{title: '', content: ''}}/>
+            <PostForm onSubmit={submit} post={{title: '', content: '', tags: ['Whisky', 'Scotch']}}/>
         </>
     );
 }
