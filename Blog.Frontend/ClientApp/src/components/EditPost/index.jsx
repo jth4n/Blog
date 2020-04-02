@@ -25,7 +25,7 @@ export const EditPost = (props) => {
     return (
         <>
             <h1>Edit Post</h1>
-            {post && <PostForm onSubmit={submit} post={{title: post.title, content: post.content, tags: post.tags.map(t => t.tagName)}}/>}
+            {post && <PostForm onSubmit={submit} post={{...post, tags: post.tags.map(t => t.tagName)}}/>}
             {showLoader && <Loader />}
         </>
     )

@@ -11,16 +11,18 @@ export const PostsTable = () => {
     const api = CreateApi('https://localhost:44369/api');
 
     useEffect(() => {
-        const posts = api.getPosts('https://localhost:44369/api/posts')
+        api.getPosts()
             .then(data => setPosts(data))
             .catch(reason => console.log(reason))
             .then(() => setShowLoader(false));
-    });
+    }, []);
 
     const deletePost = (id) => {
         setShowLoader(true);
         api.deletePost(id)
-            .then((response) => console.log(response))
+            .then((response) => {
+                setPosts(posts.filter(post => post.id !== id ))
+            })
             .catch(error => console.log(error))
             .then(() => setShowLoader(false));
     }

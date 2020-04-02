@@ -1,11 +1,13 @@
+using Blog.Domain.Commands;
+using Blog.Domain.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Blog.Frontend.Data;
-using Blog.Frontend.Infrastructure;
 using Blog.Frontend.Models;
 using Blog.Frontend.Models.V1;
+using Blog.Services.CommandHandlers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -45,8 +47,8 @@ namespace Blog.Frontend
             services.AddRazorPages();
 
             services.AddTransient<IBlogRepository, BlogRepository>();
-            services.AddTransient<ICommandHandler<CreatePostRequest>, PostCommandHandler>();
-            services.AddTransient<ICommandHandler<DeletePostRequest>, PostCommandHandler>();
+            services.AddTransient<ICommandHandler<CreatePostCommand>, PostCommandHandler>();
+            services.AddTransient<ICommandHandler<DeletePostCommand>, PostCommandHandler>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

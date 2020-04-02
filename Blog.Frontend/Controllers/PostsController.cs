@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Blog.Frontend.Infrastructure;
+using Blog.Domain.Commands;
+using Blog.Domain.Interfaces;
+using Blog.Frontend.Data;
 using Blog.Frontend.Models;
 using Blog.Frontend.Models.V1;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +13,12 @@ namespace Blog.Frontend.Controllers
     public class PostsController : ControllerBase
     {
         private readonly IBlogRepository _blogRepository;
-        private readonly ICommandHandler<CreatePostRequest> _createPostCreatePostCommandHandler;
-        private readonly ICommandHandler<DeletePostRequest> _deletePostCommandHandler;
+        private readonly ICommandHandler<CreatePostCommand> _createPostCreatePostCommandHandler;
+        private readonly ICommandHandler<DeletePostCommand> _deletePostCommandHandler;
 
-        public PostsController(IBlogRepository blogRepository, ICommandHandler<CreatePostRequest> createPostCommandHandler, ICommandHandler<DeletePostRequest> deletePostCommandHandler)
+        public PostsController(IBlogRepository blogRepository, 
+            ICommandHandler<CreatePostCommand> createPostCommandHandler, 
+            ICommandHandler<DeletePostCommand> deletePostCommandHandler)
         {
             _blogRepository = blogRepository;
             _createPostCreatePostCommandHandler = createPostCommandHandler;
@@ -25,7 +29,7 @@ namespace Blog.Frontend.Controllers
         [Route("")]
         public async Task<IActionResult> CreatePost([FromBody]CreatePostRequest request)
         {
-            await _createPostCreatePostCommandHandler.Handle(request);
+            await _createPostCreatePostCommandHandler.Handle(new CreatePostCommand(request.Title, request.Content, request.Tags));
             return Ok();
         }
 
@@ -47,7 +51,7 @@ namespace Blog.Frontend.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> DeletePost([FromRoute]DeletePostRequest request)
         {
-            await _deletePostCommandHandler.Handle(request);
+            await _deletePostCommandHandler.Handle(new DeletePostCommand(request.Id));
             return Ok();
         }
     }

@@ -2,21 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blog.Domain;
-using Blog.Frontend.Data;
-using Microsoft.AspNetCore.Mvc;
+using Blog.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Blog.Frontend.Infrastructure
+namespace Blog.Frontend.Data
 {
-    public interface IBlogRepository
-    {
-        Task Save(Post post);
-        Task<Post> Load(Guid id);
-        Task Delete(Guid id);
-        Task<IEnumerable<Post>> GetAllPosts();
-        Task<Post> GetPost(Guid id);
-    }
-
     class BlogRepository : IBlogRepository
     {
         private readonly BlogDbContext _context;
