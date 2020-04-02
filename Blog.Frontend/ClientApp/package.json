@@ -1,6 +1,7 @@
 {
   "name": "blog.frontend",
   "version": "0.1.0",
+  "homepage": "/admin/",
   "private": true,
   "dependencies": {
     "@tinymce/tinymce-react": "^3.5.0",

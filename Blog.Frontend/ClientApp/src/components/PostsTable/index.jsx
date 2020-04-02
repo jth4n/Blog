@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from 'react-router-dom';
 import { Table, Button } from 'reactstrap';
 import { CreateApi } from '../../infrastructure/request'
 import { IoIosAddCircleOutline, IoMdTrash, IoMdCreate } from "react-icons/io";
@@ -48,13 +49,13 @@ export const PostsTable = () => {
                             <td>{post.author}</td>
                             <td>{post.created}</td>
                             <td>
-                                <a href={"/edit-post/" + post.id}><IoMdCreate /></a>
+                                <Link to={"/edit-post/" + post.id}><IoMdCreate /></Link>
                                 <Button color="link" onClick={() => deletePost(post.id)}><IoMdTrash /></Button>
                             </td>
                         </tr>)}
                 </tbody>
             </Table>
-            <h2><a href="/add-post"><IoIosAddCircleOutline /></a></h2>
+            <h2><Link to='/add-post'><IoIosAddCircleOutline /></Link></h2>
         </>
     );
 }
